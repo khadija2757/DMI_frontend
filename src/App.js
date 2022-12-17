@@ -1,40 +1,42 @@
 import React from 'react';
+import Home from './pages/home';
 import {
   ChakraProvider,
+  extendTheme,
   Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
+  Container
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { Navbar } from './pages/home/Navbar';
+import Utilisateurs from './pages/utilisateurs';
+const colors = {
+  vert: {
+    900: '#118a7e',
+    800: '#3baea0',
+    700: '#93e4c1',
+  },
+}
 
+const theme = extendTheme({ colors })
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Hello Sidoine
-            </Link>
-          </VStack>
-        </Grid>
+      <Box as="section" height="100vh" overflowY="auto">
+        <Navbar />
+        <Container
+          pt={{
+            base: '8',
+            lg: '12',
+          }}
+          pb={{
+            base: '12',
+            lg: '24',
+          }}
+          minW="75%"
+        >
+          <Utilisateurs />
+        </Container>
       </Box>
+
     </ChakraProvider>
   );
 }
